@@ -1,7 +1,7 @@
 Summary:        Installs SailfishOS:Chum GUI application
 License:        MIT
 Name:           sailfishos-chum-gui-installer
-# The Git release tag format must adhere to just <version>. The <version>
+# The Git release tag format must adhere to just <version>.  The <version>
 # field adheres to semantic versioning and the <release> field comprises a
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
@@ -13,7 +13,7 @@ URL:            https://github.com/sailfishos-chum/%{name}
 # These "Source:" line below require that the value of ${name} is also the
 # project name at GitHub and the value of ${version} is also the name of a
 # correspondingly set git-tag.
-Source:         https://github.com/sailfishos-chum/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 # For details on "Requires:" statements, especially "Requires(a,b,c):", see:
 # https://rpm-software-management.github.io/rpm/manual/spec.html#requires
