@@ -1,7 +1,7 @@
 Summary:        Installs SailfishOS:Chum GUI application
 License:        MIT
 Name:           sailfishos-chum-gui-installer
-# The Git release tag format must adhere to just <version>. The <version>
+# The Git release tag format must adhere to just <version>.  The <version>
 # field adheres to semantic versioning and the <release> field comprises a
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
@@ -10,10 +10,10 @@ Version:        0.1.0
 Release:        1
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
-# These "Source:" line below require that the value of ${name} is also the
-# project name at GitHub and the value of ${version} is also the name of a
+# These "Source:" line below require that the value of %%{name} is also the
+# project name at GitHub and the value of %%{version} is also the name of a
 # correspondingly set git-tag.
-Source:         https://github.com/sailfishos-chum/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source:         %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 # For details on "Requires:" statements, especially "Requires(a,b,c):", see:
 # https://rpm-software-management.github.io/rpm/manual/spec.html#requires
@@ -26,8 +26,8 @@ Requires:       PackageKit
 Requires(posttrans): PackageKit
 # `or` was introduced with RPM 4.13, SailfishOS v2.2.1 started deploying v4.14:
 # https://together.jolla.com/question/187243/changelog-221-nurmonjoki/#187243-rpm
-# But the SailfishOS-OBS' does not, either due to the antique release or `tar_git`:
-# https://github.com/MeeGoIntegration/obs-service-tar-git
+# But the SailfishOS-OBS' does not support `or`, either due to the antique OBS
+# release or `tar_git`: https://github.com/MeeGoIntegration/obs-service-tar-git
 # ToDo: Check if the GNU-versions of these packages (named as alternatives below)
 # also provide the aliases ("virtual packages") denoted here, then these can be
 # used; ultimately most of these packages shall be already installed, anyway.
@@ -156,3 +156,4 @@ exit 0
 %changelog
 * Sat Dec 31 2022 olf <Olf0@users.noreply.github.com> - 0.1.0-1
 - Based (by copying and adapting) on Storeman Installer 2.1.6
+
