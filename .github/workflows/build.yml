@@ -17,12 +17,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Cache SDK image
-      id: cache-sdk
-      uses: actions/cache@v3
-      with:
-        path: coderus/github-sfos-build@*
-        key: cache
+    # Caching Docker images is not ready yet, see 
+    # https://github.com/storeman-developers/harbour-storeman-installer/blob/devel/cache-docker-images_github-ci.md
+    #- name: Cache Docker images of the Sailfish-SDK
+    #  id: cache-sdk
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: $GITHUB_WORKSPACE/…
+    #    key: cache
 
     - name: Prepare
       run: mkdir RPMS
@@ -30,12 +32,11 @@ jobs:
     - name: Build armv7hl
       uses: coderus/github-sfos-build@old-stable
       with:
-        release: 3.0.1.12
+        release: 3.1.0.12
         arch: armv7hl
 
     - name: Upload build result
       uses: actions/upload-artifact@v3
       with:
-        name: rpm-build-result
+        name: RPM-build-results
         path: RPMS/
-
