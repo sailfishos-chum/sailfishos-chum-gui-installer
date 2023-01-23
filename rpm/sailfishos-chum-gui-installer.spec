@@ -80,11 +80,9 @@ Categories:
 DeveloperName: olf (Olf0)
 Custom:
   Repo: %{url}
-Icon: %{url}/raw/main/.icons/%{name}.svg
-Screenshots:
- - %{screenshots_url}sailfishos-chum-gui-01.png
+Icon: %{url}/raw/main/.icons/%{name}.svg  #Screenshots: - %{screenshots_url}sailfishos-chum-gui-01.png
 Url:
-  Homepage: %{url}
+  Homepage: https://openrepos.net/content/olf/sailfishoschum-gui-installer
   Help: %{url}/issues
   Bugtracker: %{url}/issues
 %endif
