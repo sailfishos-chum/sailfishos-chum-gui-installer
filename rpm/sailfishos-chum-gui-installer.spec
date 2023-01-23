@@ -10,7 +10,7 @@ Version:        0.1.0
 Release:        1
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
-# These "Source0:" line below requires that the value of %%{name} is also the
+# The "Source0:" line below requires that the value of %%{name} is also the
 # project name at GitHub and the value of %%{version} is also the name of a
 # correspondingly set git-tag.
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
