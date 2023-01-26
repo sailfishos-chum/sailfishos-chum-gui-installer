@@ -154,6 +154,6 @@ exit 0
 %attr(0754,root,ssu) %{_bindir}/%{name}
 
 %changelog
-* Sat Dec 31 2022 olf <Olf0@users.noreply.github.com> - 0.1.0-1
-- Based (by copying and adapting) on Storeman Installer 2.1.6
+* Thu Sep  9 1999 olf <Olf0@users.noreply.github.com> - 9.9.9
+- %{url}/releases
 
