@@ -76,7 +76,7 @@ of the device and its installed SailfishOS release.
 PackageName: SailfishOS:Chum GUI Installer
 Type: desktop-application
 Categories:
- - Utilities
+ - Utility
  - System
  - Network
  - PackageManager
