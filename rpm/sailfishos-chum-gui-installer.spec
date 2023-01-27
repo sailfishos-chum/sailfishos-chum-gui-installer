@@ -74,7 +74,7 @@ of the device and its installed SailfishOS release.
 
 %if "%{?vendor}" == "chum"
 PackageName: SailfishOS:Chum GUI Installer
-Type: generic
+Type: desktop-application
 Categories:
  - Utilities
  - System
