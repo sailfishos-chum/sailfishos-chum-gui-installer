@@ -6,7 +6,7 @@ Name:           sailfishos-chum-gui-installer
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
-Version:        0.1.0
+Version:        1.0.0
 Release:        1
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
@@ -14,9 +14,9 @@ URL:            https://github.com/sailfishos-chum/%{name}
 # project name at GitHub and the value of %%{version} is also the name of a
 # correspondingly set git-tag.
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-# Note that the rpmlintrc file shall be named exactly so according to
+# Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
-Source99:       %{name}-rpmlintrc 
+Source99:       %{name}.rpmlintrc 
 BuildArch:      noarch
 # For details on "Requires:" statements, especially "Requires(a,b,c):", see:
 # https://rpm-software-management.github.io/rpm/manual/spec.html#requires
