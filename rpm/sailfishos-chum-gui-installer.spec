@@ -58,7 +58,9 @@ Requires(posttrans): psmisc
 Requires:       sailfish-version >= 3.1.0
 # Provide (anti-)dependencies to sibling packages:
 Conflicts:      sailfishos-chum
+Obsoletes:      sailfishos-chum
 Conflicts:      sailfishos-chum-testing
+Obsoletes:      sailfishos-chum-testing
 Provides:       sailfishos-chum-repository
 
 # %%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.xdata/screenshots/
