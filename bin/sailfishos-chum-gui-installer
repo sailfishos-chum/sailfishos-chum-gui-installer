@@ -200,7 +200,7 @@ do
                         # sh_rm_inst-chum
   fi
 done
-logentry="pkcon -pvy install sailfishos-chum"
+logentry="pkcon -pvy install sailfishos-chum-gui"
 # Sleeping again for a second right before the next pkcon call, because pkcon
 # *rarely* fails installing a package ("not found") immediately after an
 # individual repository refresh via `repo-set-data <repo> refresh-now true`.
