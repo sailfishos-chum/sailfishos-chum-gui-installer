@@ -6,7 +6,7 @@ Name:           sailfishos-chum-gui-installer
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
-Version:        1.0.0
+Version:        0.2.0
 Release:        1
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
@@ -106,9 +106,9 @@ cp bin/%{name} %{buildroot}%{_bindir}/
 if [ ! -e %{logfile} ]
 then
   curmask="$(umask)"
-  umask 7022  # The first octal digit is ignored by most implementations
+  umask 022
   [ ! -e %{logdir} ] && mkdir -p %{logdir}
-  umask 7113
+  umask 113
   touch %{logfile}
   # Not necessary, because umask is set:
   # chmod 0664 %%{logfile}
@@ -141,7 +141,7 @@ exit 0
 # (by a double-fork / "daemonize") to allow for this RPM transaction
 # to finalise (what waiting for it to finish would prevent).
 # (Ab)using the %%posttrans' interpreter instance for the preamble:
-umask 7113  # Most implementations ignore the first octet
+umask 113
 # [ "$PWD" = / ] || cd /  # Set PWD to /, if not already; omitted,
 # because the scriptlets are executed with PWD safely set to /.
 setsid --fork sh -c '(%{_bindir}/%{name} "$1" "$2")' sh_call_inst-chum-gui "$$" "%{logfile}" >> "%{logfile}" 2>&1 <&-
