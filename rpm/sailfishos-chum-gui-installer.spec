@@ -78,9 +78,10 @@ of the device and its installed SailfishOS release.
 PackageName: SailfishOS:Chum GUI Installer
 Type: desktop-application
 Categories:
- - Utility
  - System
+ - Utility
  - Network
+ - Settings
  - PackageManager
 DeveloperName: olf (Olf0)
 Custom:
