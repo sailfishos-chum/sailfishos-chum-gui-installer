@@ -6,7 +6,7 @@ Name:           sailfishos-chum-gui-installer
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
-Version:        0.2.1
+Version:        0.3.0
 Release:        1
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
@@ -136,6 +136,15 @@ fi
 # Hence I have the impression, that only the main section of a spec file is
 # interpreted in a shell called with the option `-e', but not the scriptlets
 # (`%%pre*`, `%%post*`, `%%trigger*` and `%%file*`).
+exit 0
+
+%postun
+if [ "$1" = 0 ]  # Removal
+then
+  ssu rr sailfishos-chum
+  rm -f /var/cache/ssu/features.ini
+  ssu ur
+fi
 exit 0
 
 %posttrans
