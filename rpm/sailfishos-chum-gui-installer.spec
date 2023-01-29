@@ -61,21 +61,74 @@ Conflicts:      sailfishos-chum
 Obsoletes:      sailfishos-chum
 Conflicts:      sailfishos-chum-testing
 Obsoletes:      sailfishos-chum-testing
+Conflicts:      sailfishos-chum-installer-testing
+Obsoletes:      sailfishos-chum-installer-testing
+Provides:       sailfishos-chum-repository
+
+%package testing
+Summary:        Installs SailfishOS:Chum GUI app from SailfishOS:Chum:Testing
+License:        MIT
+Group:          Applications/System
+BuildArch:      noarch
+Requires:       ssu
+Requires(post): ssu
+Requires:       PackageKit
+Requires(posttrans): PackageKit
+Requires:       coreutils
+Requires(post): coreutils
+Requires(posttrans): coreutils
+Requires:       util-linux
+Requires(posttrans): util-linux
+Requires:       psmisc
+Requires(posttrans): psmisc
+Requires:       sailfish-version >= 3.1.0
+# Provide (anti-)dependencies to sibling packages:
+Conflicts:      sailfishos-chum
+Obsoletes:      sailfishos-chum
+Conflicts:      sailfishos-chum-testing
+Obsoletes:      sailfishos-chum-testing
+Conflicts:      sailfishos-chum-installer
+Obsoletes:      sailfishos-chum-installer
 Provides:       sailfishos-chum-repository
 
 # %%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.xdata/screenshots/
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
 
-# This %%description section includes metadata for SailfishOS:Chum, see
+# This %%description sections includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
 %description
-SailfishOS:Chum GUI Installer selects, downloads and installs the right variant
-of the SailfishOS:Chum GUI application built for the CPU-architecture
+SailfishOS:Chum GUI Installer selects, downloads and installs the right
+variant of the SailfishOS:Chum GUI application built for the CPU-architecture
 of the device and its installed SailfishOS release.
 
 %if "%{?vendor}" == "chum"
 PackageName: SailfishOS:Chum GUI Installer
+Type: desktop-application
+Categories:
+ - System
+ - Utility
+ - Network
+ - Settings
+ - PackageManager
+DeveloperName: olf (Olf0)
+Custom:
+  Repo: %{url}
+Icon: %{url}/raw/main/.icons/%{name}.svg  #Screenshots: - %%{screenshots_url}sailfishos-chum-gui-01.png
+Url:
+  Homepage: https://openrepos.net/content/olf/sailfishoschum-gui-installer
+  Help: %{url}/issues
+  Bugtracker: %{url}/issues
+%endif
+
+%description testing
+SailfishOS:Chum GUI Installer testing selects, downloads and installs the right
+variant of the SailfishOS:Chum GUI application built for the CPU-architecture
+of the device and its installed SailfishOS release from the
+SailfishOS:Chum:Testing repository.
+
+%if "%{?vendor}" == "chum"
+PackageName: SailfishOS:Chum GUI Installer testing
 Type: desktop-application
 Categories:
  - System
@@ -118,13 +171,35 @@ then
   chgrp ssu %{logfile}
   umask "$curmask"
 fi
-# The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
-# Installer is removed, but when the SailfishOS:Chum GUI application is removed.
-if ! ssu lr | grep '^ - ' | cut -f 3 -d ' ' | grep -Fq sailfishos-chum
+# Add sailfishos-chum repository as sfos-chum-gui-inst-repo
+if ! ssu lr | grep '^ - ' | cut -f 3 -d ' ' | grep -Fq sfos-chum-gui-inst-repo
 then
-  ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
+  ssu ar sfos-chum-gui-inst-repo 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
   ssu ur
 fi
+exit 0
+
+%post testing
+if [ ! -e %{logfile} ]
+then
+  curmask="$(umask)"
+  umask 022
+  [ ! -e %{logdir} ] && mkdir -p %{logdir}
+  umask 113
+  touch %{logfile}
+  # Not necessary, because umask is set:
+  # chmod 0664 %%{logfile}
+  chgrp ssu %{logfile}
+  umask "$curmask"
+fi
+# Add sailfishos-chum-testing repository as sfos-chum-gui-inst-repo
+if ! ssu lr | grep '^ - ' | cut -f 3 -d ' ' | grep -Fq sfos-chum-gui-inst-repo
+then
+  ssu ar sfos-chum-gui-inst-repo 'https://repo.sailfishos.org/obs/sailfishos:/chum:/testing/%%(release)_%%(arch)/'
+  ssu ur
+fi
+exit 0
+
 # BTW, `ssu`, `rm -f`, `mkdir -p` etc. *always* return with "0" ("success"), hence
 # no appended `|| true` needed to satisfy `set -e` for failing commands outside of
 # flow control directives (if, while, until etc.).  Furthermore on Fedora Docs it
@@ -136,12 +211,20 @@ fi
 # Hence I have the impression, that only the main section of a spec file is
 # interpreted in a shell called with the option `-e', but not the scriptlets
 # (`%%pre*`, `%%post*`, `%%trigger*` and `%%file*`).
-exit 0
 
 %postun
 if [ "$1" = 0 ]  # Removal
 then
-  ssu rr sailfishos-chum
+  ssu rr sfos-chum-gui-inst-repo
+  rm -f /var/cache/ssu/features.ini
+  ssu ur
+fi
+exit 0
+
+%postun testing
+if [ "$1" = 0 ]  # Removal
+then
+  ssu rr sfos-chum-gui-inst-repo
   rm -f /var/cache/ssu/features.ini
   ssu ur
 fi
@@ -162,7 +245,16 @@ setsid --fork sh -c '(%{_bindir}/%{name} "$1" "$2")' sh_call_inst-chum-gui "$$" 
 # sh_call_inst-ch
 exit 0
 
+%posttrans testing
+umask 113
+# sh_call_inst-ch
+setsid --fork sh -c '(%{_bindir}/%{name} "$1" "$2")' sh_call_inst-chum-gui "$$" "%{logfile}" >> "%{logfile}" 2>&1 <&-
+exit 0
+
 %files
+%attr(0754,root,ssu) %{_bindir}/%{name}
+
+files testing
 %attr(0754,root,ssu) %{_bindir}/%{name}
 
 %changelog
