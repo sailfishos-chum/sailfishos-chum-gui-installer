@@ -120,11 +120,8 @@ then
 fi
 # The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
 # Installer is removed, but when the SailfishOS:Chum GUI application is removed.
-if ! ssu lr | grep '^ - ' | cut -f 3 -d ' ' | grep -Fq sailfishos-chum
-then
-  ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
-  ssu ur
-fi
+ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
+ssu ur
 # BTW, `ssu`, `rm -f`, `mkdir -p` etc. *always* return with "0" ("success"), hence
 # no appended `|| true` needed to satisfy `set -e` for failing commands outside of
 # flow control directives (if, while, until etc.).  Furthermore on Fedora Docs it
