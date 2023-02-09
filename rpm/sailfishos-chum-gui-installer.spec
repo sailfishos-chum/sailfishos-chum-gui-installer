@@ -1,5 +1,5 @@
 Summary:        Installs SailfishOS:Chum GUI application
-License:        MIT
+License:        LGPL-2.1-only
 Name:           sailfishos-chum-gui-installer
 # The Git release tag format must adhere to just <version>.  The <version>
 # field adheres to semantic versioning and the <release> field comprises a
