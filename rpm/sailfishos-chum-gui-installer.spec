@@ -1,12 +1,12 @@
 Summary:        Installs SailfishOS:Chum GUI application
-License:        MIT
+License:        LGPL-2.1-only
 Name:           sailfishos-chum-gui-installer
 # The Git release tag format must adhere to just <version>.  The <version>
 # field adheres to semantic versioning and the <release> field comprises a
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
-Version:        0.3.0
+Version:        0.3.1
 Release:        1
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
@@ -120,11 +120,8 @@ then
 fi
 # The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
 # Installer is removed, but when the SailfishOS:Chum GUI application is removed.
-if ! ssu lr | grep '^ - ' | cut -f 3 -d ' ' | grep -Fq sailfishos-chum
-then
-  ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
-  ssu ur
-fi
+ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
+ssu ur
 # BTW, `ssu`, `rm -f`, `mkdir -p` etc. *always* return with "0" ("success"), hence
 # no appended `|| true` needed to satisfy `set -e` for failing commands outside of
 # flow control directives (if, while, until etc.).  Furthermore on Fedora Docs it
