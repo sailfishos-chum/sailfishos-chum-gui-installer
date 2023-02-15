@@ -74,7 +74,7 @@ SailfishOS:Chum GUI Installer selects, downloads and installs the right variant
 of the SailfishOS:Chum GUI application built for the CPU-architecture
 of the device and its installed SailfishOS release.
 
-%if "%{?vendor}" == "chum"
+%if 0%{?_chum}
 PackageName: SailfishOS:Chum GUI Installer
 Type: desktop-application
 Categories:
