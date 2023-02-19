@@ -61,6 +61,10 @@ Conflicts:      sailfishos-chum
 Obsoletes:      sailfishos-chum
 Conflicts:      sailfishos-chum-testing
 Obsoletes:      sailfishos-chum-testing
+Conflicts:      sailfishos-chum-repo-config
+Obsoletes:      sailfishos-chum-repo-config
+Conflicts:      sailfishos-chum-repo-config-testing
+Obsoletes:      sailfishos-chum-repo-config-testing
 Provides:       sailfishos-chum-repository
 
 # %%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.xdata/screenshots/
