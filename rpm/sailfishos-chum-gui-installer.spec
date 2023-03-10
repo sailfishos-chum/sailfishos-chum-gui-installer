@@ -61,9 +61,13 @@ Conflicts:      sailfishos-chum
 Obsoletes:      sailfishos-chum
 Conflicts:      sailfishos-chum-testing
 Obsoletes:      sailfishos-chum-testing
+Conflicts:      sailfishos-chum-repo-config
+Obsoletes:      sailfishos-chum-repo-config
+Conflicts:      sailfishos-chum-repo-config-testing
+Obsoletes:      sailfishos-chum-repo-config-testing
 Provides:       sailfishos-chum-repository
 
-# %%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.xdata/screenshots/
+# %%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.xdata/screenshots
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
 
@@ -74,7 +78,7 @@ SailfishOS:Chum GUI Installer selects, downloads and installs the right variant
 of the SailfishOS:Chum GUI application built for the CPU-architecture
 of the device and its installed SailfishOS release.
 
-%if "%{?vendor}" == "chum"
+%if 0%{?_chum}
 PackageName: SailfishOS:Chum GUI Installer
 Type: desktop-application
 Categories:
@@ -86,12 +90,15 @@ Categories:
 DeveloperName: olf (Olf0)
 Custom:
   Repo: %{url}
-Icon: %{url}/raw/main/.icons/%{name}.svg  #Screenshots: - %%{screenshots_url}sailfishos-chum-gui-01.png
+Icon: %{url}/raw/main/.icons/sailfishos-chum-gui.svg  #Screenshots: - %%{screenshots_url}/sailfishos-chum-gui-01.png
 Url:
   Homepage: https://openrepos.net/content/olf/sailfishoschum-gui-installer
   Help: %{url}/issues
   Bugtracker: %{url}/issues
 %endif
+
+%define _binary_payload w6.gzdio
+%define _source_payload w6.gzdio
 
 %prep
 %setup -q
@@ -165,4 +172,3 @@ exit 0
 %changelog
 * Thu Sep  9 1999 olf <Olf0@users.noreply.github.com> - 99.99.99
 - See %{url}/releases
-
