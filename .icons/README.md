@@ -1,4 +1,4 @@
-# SailfishOS:Chum and SailfishOS:Chum GUI icons
+# SailfishOS:Chum & SailfishOS:Chum GUI icons
 This README documents the "new icon(s)" for the [SailfishOS:Chum community repository](https://github.com/sailfishos-chum) and its [repository configuration RPM(s)](https://github.com/sailfishos-chum/sailfishos-chum-repo-config), plus the [SailfishOS:Chum GUI application](https://github.com/sailfishos-chum/sailfishos-chum-gui) and its [Installer](https://github.com/sailfishos-chum/sailfishos-chum-gui-installer) created in Q1/2023 by [**\@Olf0** (olf)](https://github.com/Olf0).
 
 ### Variants of this icon
