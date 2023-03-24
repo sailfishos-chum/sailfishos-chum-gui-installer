@@ -92,7 +92,7 @@ Custom:
   Repo: %{url}
 Icon: %{url}/raw/main/.icons/sailfishos-chum-gui.svg
 Screenshots:
- - %{screenshots_url}/sailfishos-chum-gui_refreshing.png
+ - %{screenshots_url}/sailfishos-chum-gui_retrieving-refreshed.png
  - %{screenshots_url}/sailfishos-chum-gui_main-page.png
  - %{screenshots_url}/sailfishos-chum-gui_settings.png
  - %{screenshots_url}/sailfishos-chum-gui_applications.png
