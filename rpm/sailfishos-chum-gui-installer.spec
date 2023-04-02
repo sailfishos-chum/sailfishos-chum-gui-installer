@@ -67,7 +67,7 @@ Conflicts:      sailfishos-chum-repo-config-testing
 Obsoletes:      sailfishos-chum-repo-config-testing
 Provides:       sailfishos-chum-repository
 
-# %%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.xdata/screenshots
+%global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
 
@@ -90,7 +90,14 @@ Categories:
 DeveloperName: olf (Olf0)
 Custom:
   Repo: %{url}
-Icon: %{url}/raw/main/.icons/sailfishos-chum-gui.svg  #Screenshots: - %%{screenshots_url}/sailfishos-chum-gui-01.png
+Icon: %{url}/raw/main/.icons/sailfishos-chum-gui.svg
+Screenshots:
+ - %{screenshots_url}/sailfishos-chum-gui_retrieving-refreshed.png
+ - %{screenshots_url}/sailfishos-chum-gui_main-page.png
+ - %{screenshots_url}/sailfishos-chum-gui_settings.png
+ - %{screenshots_url}/sailfishos-chum-gui_applications.png
+ - %{screenshots_url}/sailfishos-chum-gui_categories.png
+ - %{screenshots_url}/sailfishos-chum-gui_installed-packages.png
 Url:
   Homepage: https://openrepos.net/content/olf/sailfishoschum-gui-installer
   Help: %{url}/issues
