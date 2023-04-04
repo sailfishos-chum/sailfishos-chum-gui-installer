@@ -79,7 +79,7 @@ of the SailfishOS:Chum GUI application built for the CPU-architecture
 of the device and its installed SailfishOS release.
 
 %if 0%{?_chum}
-PackageName: SailfishOS:Chum GUI Installer
+Title: SailfishOS:Chum GUI Installer
 Type: desktop-application
 Categories:
  - System
@@ -90,7 +90,7 @@ Categories:
 DeveloperName: olf (Olf0)
 Custom:
   Repo: %{url}
-Icon: %{url}/raw/main/.icons/sailfishos-chum-gui.svg
+PackageIcon: %{url}/raw/main/.icons/sailfishos-chum-gui.svg
 Screenshots:
  - %{screenshots_url}/sailfishos-chum-gui_retrieving-refreshed.png
  - %{screenshots_url}/sailfishos-chum-gui_main-page.png
@@ -98,7 +98,7 @@ Screenshots:
  - %{screenshots_url}/sailfishos-chum-gui_applications.png
  - %{screenshots_url}/sailfishos-chum-gui_categories.png
  - %{screenshots_url}/sailfishos-chum-gui_installed-packages.png
-Url:
+Links:
   Homepage: https://openrepos.net/content/olf/sailfishoschum-gui-installer
   Help: %{url}/issues
   Bugtracker: %{url}/issues
