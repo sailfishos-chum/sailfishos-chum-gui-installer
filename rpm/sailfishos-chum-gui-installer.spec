@@ -8,7 +8,7 @@ Name:           sailfishos-chum-gui-installer
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
 Version:        0.6.2
 Release:        1
-# The contents of the Group field should be one of the groups listed here:
+# The Group field should comprise one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Applications/System
 URL:            https://github.com/sailfishos-chum/%{name}
