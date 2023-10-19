@@ -2,7 +2,7 @@
 
 **The SailfishOS:Chum GUI Installer performs the initial installation of the [SailfishOS:Chum GUI application](https://github.com/sailfishos-chum/sailfishos-chum-gui#readme). SailfishOS:Chum GUI Installer selects, downloads and installs the correct variant of the SailfishOS:Chum GUI application built for the CPU-architecture of the device and the installed SailfishOS release from the SailfishOS-OBS.**
 
-The SailfishOS:Chum GUI Installer works on any SailfishOS release ≥&nbsp;3.1.0 and all supported CPU-architectures (armv7hl, i486 and aarch64).  The current SailfishOS:Chum GUI Installer RPM can be obtained from its ["latest release" page at GitHub](https://github.com/sailfishos-chum/sailfishos-chum-gui-installer/releases/latest), [OpenRepos.net](https://openrepos.net/content/olf/sailfishos-chum-gui-installer) and [the SailfishOS-OBS](https://build.merproject.org/package/show/sailfishos:chum/sailfishos-chum-gui-installer).
+The SailfishOS:Chum GUI Installer works on any SailfishOS release ≥&nbsp;3.1.0 and all supported CPU-architectures (armv7hl, i486 and aarch64).  The current SailfishOS:Chum GUI Installer RPM can be obtained from [OpenRepos.net](https://openrepos.net/content/olf/sailfishoschum-gui-installer#node-11554), its ["latest release" page at GitHub](https://github.com/sailfishos-chum/sailfishos-chum-gui-installer/releases/latest) and [the SailfishOS-OBS](https://build.merproject.org/package/show/sailfishos:chum/sailfishos-chum-gui-installer).
 
 ### Important notes
 
