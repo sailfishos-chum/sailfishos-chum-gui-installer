@@ -4,7 +4,7 @@ Name:           sailfishos-chum-gui-installer
 # The Git release tag format must adhere to just <version>.  The <version>
 # field adheres to semantic versioning and the <release> field comprises a
 # natural number greater or equal to 1, which may be prefixed with one of
-# {alpha,beta,rc,release} (e.g., "beta3").  For details and reasons, see
+# {alpha,beta,rc,release} (e.g. "beta3").  For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
 Version:        0.6.3
 Release:        1
@@ -36,7 +36,7 @@ Requires(posttrans): PackageKit
 # ToDo: Check if the GNU-versions of these packages (named as alternatives below)
 # also provide the aliases ("virtual packages") denoted here, then these can be
 # used; ultimately most of these packages shall be already installed, anyway.
-# 1. `coreutils` (for e.g., `touch` and many other very basic UNIX tools):
+# 1. `coreutils` (for e.g. `touch` and many other very basic UNIX tools):
 # Requires:       (busybox-symlinks-coreutils or gnu-coreutils)
 Requires:       coreutils
 # Requires(post,posttrans): (busybox-symlinks-coreutils or gnu-coreutils)
@@ -120,7 +120,7 @@ cp bin/%{name} %{buildroot}%{_bindir}/
 
 %post
 # The %%post scriptlet is deliberately run when installing and updating.
-# Create a persistent log file, i.e., which is not managed by RPM and hence
+# Create a persistent log file, i.e. which is not managed by RPM and hence
 # is unaffected by removing the %%{name} RPM package:
 if [ ! -e %{logfile} ]
 then
@@ -171,7 +171,7 @@ umask 113
 # because the scriptlets are executed with PWD safely set to /.
 setsid --fork sh -c '(%{_bindir}/%{name} "$1" "$2")' sh_call_inst-chum-gui "$$" "%{logfile}" >> "%{logfile}" 2>&1 <&-
 # The first 15 characters of the spawned process' name
-# (to be used for, e.g., `ps` and `pgrep` / `pkill`) are:
+# (to be used for, e.g. `ps` and `pgrep` / `pkill`) are:
 # sh_call_inst-ch
 exit 0
 
