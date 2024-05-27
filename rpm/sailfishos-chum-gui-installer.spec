@@ -72,6 +72,7 @@ Provides:       sailfishos-chum-repository
 %global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
+%global _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')
 
 # This %%description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
@@ -136,7 +137,11 @@ then
 fi
 # The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
 # Installer is removed, but when the SailfishOS:Chum GUI application is removed.
+%if 0%{?_sailfish_version} < 460
 ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
+%else
+ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
+%endif
 ssu ur
 # BTW, `ssu`, `rm -f`, `mkdir -p` etc. *always* return with "0" ("success"), hence
 # no appended `|| true` needed to satisfy `set -e` for failing commands outside of
