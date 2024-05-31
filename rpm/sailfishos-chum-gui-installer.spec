@@ -1,17 +1,17 @@
 Summary:        Installs SailfishOS:Chum GUI application
 License:        LGPL-2.1-only
+# Note that the value of %%{name} must be the project name at GitHub.
 Name:           sailfishos-chum-gui-installer
-# The Git release tag format must adhere to just <version>.  The <version>
-# field adheres to semantic versioning and the <release> field comprises a
-# natural number greater or equal to 1, which may be prefixed with one of
-# {alpha,beta,rc,release} (e.g. "beta3").  For details and reasons, see
-# https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
+# The Version field must adhere to semantic versioning, see https://semver.org/
 Version:        0.6.5
+# The Release field comprises a natural number greater or equal to 1, which
+# may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
+# For details and reasons, see
+# https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
 Release:        1
-# The Group tag should comprise one of the groups listed here:
+# The Group field should comprise one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Software Management/Package Manager
-# Note that the value of %%{name} must be the project name at GitHub:
 URL:            https://github.com/sailfishos-chum/%{name}
 # Note that the git-tag format for releases must be `%%{release}/%%{version}`:
 Source0:        %{url}/archive/`%%{release}/%{version}/%{name}-%{version}.tar.gz
