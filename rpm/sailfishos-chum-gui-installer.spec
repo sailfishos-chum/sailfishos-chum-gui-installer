@@ -137,10 +137,10 @@ then
 fi
 # The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
 # Installer is removed, but when the SailfishOS:Chum GUI application is removed.
-%if 0%{?_sailfish_version} < 460
-ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
-%else
+%if 0%{?_sailfish_version} >= 460
 ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
+%else
+ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
 %endif
 ssu ur
 # BTW, `ssu`, `rm -f`, `mkdir -p` etc. *always* return with "0" ("success"), hence
