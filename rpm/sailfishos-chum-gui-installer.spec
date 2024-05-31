@@ -6,16 +6,15 @@ Name:           sailfishos-chum-gui-installer
 # natural number greater or equal to 1, which may be prefixed with one of
 # {alpha,beta,rc,release} (e.g. "beta3").  For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
-Version:        0.6.4
+Version:        0.6.5
 Release:        1
 # The Group tag should comprise one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Software Management/Package Manager
+# Note that the value of %%{name} must be the project name at GitHub:
 URL:            https://github.com/sailfishos-chum/%{name}
-# The "Source0:" line below requires that the value of %%{name} is also the
-# project name at GitHub and the value of %%{version} is also the name of a
-# correspondingly set git-tag.
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+# Note that the git-tag format for releases must be `%%{release}/%%{version}`:
+Source0:        %{url}/archive/`%%{release}/%{version}/%{name}-%{version}.tar.gz
 # Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
 Source99:       %{name}.rpmlintrc 
