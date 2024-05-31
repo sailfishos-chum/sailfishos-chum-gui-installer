@@ -112,11 +112,11 @@ Links:
 %define _source_payload w6.gzdio
 
 %prep
-echo "_sailfish_version: %{?_sailfish_version}"
-echo "_sailfish_version_: %{?_sailfish_version_}"
 %setup -q
 
 %build
+echo "_sailfish_version: %{?_sailfish_version}"
+echo "_sailfish_version_: %{?_sailfish_version_}"
 
 %install
 mkdir -p %{buildroot}%{_bindir}
