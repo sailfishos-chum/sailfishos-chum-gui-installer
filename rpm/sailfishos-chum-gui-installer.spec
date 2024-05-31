@@ -135,8 +135,8 @@ then
   chgrp ssu %{logfile}
   umask "$curmask"
 fi
-# The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
-# Installer is removed, but when the SailfishOS:Chum GUI application is removed.
+# Add sailfishos-chum repository configuration, depending on the installed
+# SailfishOS release:
 %if 0%{?_sailfish_version} >= 460
 ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
 %else
@@ -157,6 +157,10 @@ ssu ur
 exit 0
 
 %postun
+# The added sailfishos-chum repository is removed when the SailfishOS:Chum GUI
+# Installer is removed, in contrast to Storeman-Installer from which it is
+# derived, because the SailfishOS:Chum GUI application expects a pristine state as
+# it enables by itself the SailfishOS:Chum repository (or its "testing" variant).
 if [ "$1" = 0 ]  # Removal
 then
   ssu rr sailfishos-chum
