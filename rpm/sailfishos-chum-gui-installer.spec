@@ -114,6 +114,7 @@ Links:
 %setup -q
 
 %build
+echo 0%{?_sailfish_version}
 
 %install
 mkdir -p %{buildroot}%{_bindir}
