@@ -72,7 +72,7 @@ Provides:       sailfishos-chum-repository
 %global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
-%global _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')
+%global _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | sed 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1\2\3/')
 
 # This %%description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
@@ -114,7 +114,7 @@ Links:
 %setup -q
 
 %build
-echo 0%{?_sailfish_version}
+echo "_sailfish_version: %{?_sailfish_version}"
 
 %install
 mkdir -p %{buildroot}%{_bindir}
