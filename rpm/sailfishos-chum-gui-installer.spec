@@ -55,6 +55,10 @@ Requires(posttrans): psmisc
 #Requires:       procps
 # Requires(posttrans): (busybox-symlinks-procps or procps-ng)
 #Requires(posttrans): procps
+Requires:       sed
+# Requires(posttrans): (busybox-symlinks-psmisc or psmisc-tools)
+Requires(posttrans): sed
+BuildRequires:       sed
 # The oldest SailfishOS release which SailfishOS:Chum supports, because it is the
 # oldest useable DoD-repo at https://build.merproject.org/project/subprojects/sailfishos
 Requires:       sailfish-version >= 3.1.0
@@ -72,7 +76,7 @@ Provides:       sailfishos-chum-repository
 %global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
-%define _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | sed 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1\2\3/')
+%define _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | sed -e 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1\2\3/')
 %define _sailfish_version_  %(source /etc/os-release; echo $VERSION_ID | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')
 
 # This %%description section includes metadata for SailfishOS:Chum, see
