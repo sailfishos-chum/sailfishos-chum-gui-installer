@@ -76,8 +76,9 @@ Provides:       sailfishos-chum-repository
 %global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
-%define _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | %{__sed} 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1\2\3/')
-%define _sailfish_version_  %(source /etc/os-release; echo $VERSION_ID | %{__sed} -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')
+%define _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | %{__sed} 's/^\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\).*/\\1\\2\\3/')
+%define _sailfish_version_  %(source /etc/os-release; echo $VERSION_ID | %{__sed} -r 's/^(\[0-9\]+)\\.(\[0-9\]+)\\.(\[0-9\]+).*/\\1\\2\\3/')
+%define _sailfish_version__  %(source /etc/os-release; echo $VERSION_ID | cut -s -f 1-3 -d '.' | tr -d '.')
 
 # This %%description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
@@ -121,6 +122,7 @@ Links:
 %build
 echo "_sailfish_version: %{?_sailfish_version}"
 echo "_sailfish_version_: %{?_sailfish_version_}"
+echo "_sailfish_version__: %{?_sailfish_version__}"
 
 %install
 mkdir -p %{buildroot}%{_bindir}
