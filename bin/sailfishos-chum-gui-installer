@@ -200,7 +200,7 @@ do
     sleep 1
     systemctl stop packagekit.service
     systemctl start packagekit.service
-    logentry='[Notice] Scheduling sailfishos-chum-gui-installer for removal in 20 seconds, trying to install sailfishos-chum-gui despite the failed repository refresh meanwhile.'
+    logentry="[Notice] Scheduling $called for removal in 20 seconds, trying to install sailfishos-chum-gui despite the failed repository refresh meanwhile."
     printf '%s\n' "$(date -Iseconds) $logentry"
     systemd-cat -t "$called" -p 5 printf '%s' "$logentry"
     sleep 1

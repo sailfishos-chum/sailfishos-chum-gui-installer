@@ -55,6 +55,8 @@ Requires(posttrans): psmisc
 #Requires:       procps
 # Requires(posttrans): (busybox-symlinks-procps or procps-ng)
 #Requires(posttrans): procps
+Requires:       sed
+# Requires(post): sed  # Decided against this variant, see %%post scriplet
 # The oldest SailfishOS release which SailfishOS:Chum supports, because it is the
 # oldest useable DoD-repo at https://build.merproject.org/project/subprojects/sailfishos
 Requires:       sailfish-version >= 3.1.0
@@ -134,24 +136,51 @@ then
   chgrp ssu %{logfile}
   umask "$curmask"
 fi
-# The added sailfishos-chum repository is not removed when SailfishOS:Chum GUI
-# Installer is removed, but when the SailfishOS:Chum GUI application is removed.
-ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
+# Add sailfishos-chum repository configuration, depending on the installed
+# SailfishOS release (3.1.0 is the lowest supported, see line 62):
+source %{_sysconfdir}/os-release
+# Three equivalent variants, but the sed-based ones have addtional, ugly
+# backslashed quoting of all backslashes, curly braces and brackets (likely
+# also quotation marks), and a double percent for a single percent character,
+# because they were developed as shell-scripts inside a %%define / %%global
+# (the same applies to scriplets with "queryformat-expansion" option -q, see 
+# https://rpm-software-management.github.io/rpm/manual/scriptlet_expansion.html#queryformat-expansion ):
+# %%define _sailfish_version %%(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | %%{__sed} 's/^\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\).*/\\1\\2\\3/')
+# ~: sailfish_version="$(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | sed 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1\2\3/')"
+# Using an extended ("modern") RegEx shortens the sed script, but busybox's sed
+# does not support the POSIX option -E for that!  Hence one must resort to the
+# non-POSIX option -r for that, without a real gain compared to the basic RegEx:
+# %%define _sailfish_version %%(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | %%{__sed} -r 's/^(\[0-9\]+)\\.(\[0-9\]+)\\.(\[0-9\]+).*/\\1\\2\\3/')
+# ~: sailfish_version="$(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')"
+# Note: Debug output of RPM macrios assinged by %%define or %%global statements
+# is best done by `echo` / `printf` at the start of the %%build section.
+# The variant using `cut` and `tr` instead of `sed` does not require extra quoting,
+# regardless where it is used (though escaping the quotation marks might be
+# advisable, when using it inside a %%define or %%global statment's %%() ).
+sailfish_version="$(echo "$VERSION_ID" | cut -s -f 1-3 -d '.' | tr -d '.')"
+if echo "$sailfish_version" | grep -q '^[0-9][0-9][0-9][0-9]*$' && [ "$sailfish_version" -lt 460 ]
+then ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
+else ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
+fi
 ssu ur
 # BTW, `ssu`, `rm -f`, `mkdir -p` etc. *always* return with "0" ("success"), hence
 # no appended `|| true` needed to satisfy `set -e` for failing commands outside of
-# flow control directives (if, while, until etc.).  Furthermore on Fedora Docs it
-# is indicated that solely the final exit status of a whole scriptlet is crucial: 
+# flow control directives (if, while, until etc.).  Furthermore Fedora Docs etc.
+# state that solely the final exit status of a whole scriptlet is crucial: 
 # See https://docs.pagure.org/packaging-guidelines/Packaging%3AScriptlets.html
 # or https://docs.fedoraproject.org/en-US/packaging-guidelines/Scriptlets/#_syntax
 # committed on 18 February 2019 by tibbs ( https://pagure.io/user/tibbs ) in
 # https://pagure.io/packaging-committee/c/8d0cec97aedc9b34658d004e3a28123f36404324
-# Hence I have the impression, that only the main section of a spec file is
-# interpreted in a shell called with the option `-e', but not the scriptlets
-# (`%%pre*`, `%%post*`, `%%trigger*` and `%%file*`).
+# Hence only the main section of a spec file and likely also `%%(<shell-script>)`
+# statements are executed in a shell called with the option `-e', but not the
+# scriptlets: `%%pre*`, `%%post*`, `%%trigger*` and `%%file*`
 exit 0
 
 %postun
+# The added sailfishos-chum repository is removed when the SailfishOS:Chum GUI
+# Installer is removed, in contrast to Storeman-Installer from which it is
+# derived, because the SailfishOS:Chum GUI application expects a pristine state as
+# it enables by itself the SailfishOS:Chum repository (or its "testing" variant).
 if [ "$1" = 0 ]  # Removal
 then
   ssu rr sailfishos-chum
