@@ -73,6 +73,7 @@ Provides:       sailfishos-chum-repository
 %global logdir             %{_localstatedir}/log
 %global logfile            %{logdir}/%{name}.log.txt
 %define _sailfish_version  %(source /etc/os-release; echo $VERSION_ID | sed 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1\2\3/')
+%define _sailfish_version_  %(source /etc/os-release; echo $VERSION_ID | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')
 
 # This %%description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
@@ -112,6 +113,7 @@ Links:
 
 %prep
 echo "_sailfish_version: %{?_sailfish_version}"
+echo "_sailfish_version_: %{?_sailfish_version_}"
 %setup -q
 
 %build
@@ -138,7 +140,7 @@ then
 fi
 # Add sailfishos-chum repository configuration, depending on the installed
 # SailfishOS release (3.1.0 is the lowest supported, see line 60):
-%if 0%{?_sailfish_version} < 460
+%if 0%{?_sailfish_version_} < 460
 ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
 %else
 ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
