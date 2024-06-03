@@ -71,8 +71,8 @@ Obsoletes:      sailfishos-chum-repo-config-testing
 Provides:       sailfishos-chum-repository
 
 %global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
-%global logdir             %{_localstatedir}/log
-%global logfile            %{logdir}/%{name}.log.txt
+%define logdir             %{_localstatedir}/log
+%define logfile            %{logdir}/%{name}.log.txt
 
 # This %%description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
@@ -141,7 +141,7 @@ source %{_sysconfdir}/os-release
 # Three equivalent variants, but the sed-based ones have addtional, ugly
 # backslashed quoting of all backslashes, curly braces and brackets (likely
 # also quotation marks), and a double percent for a single percent character,
-# because they were developed as shell-scripts inside a %%define / %%global
+# because they were developed as shell-scripts for `%%define <name> %%(<script>)`
 # (the same applies to scriplets with "queryformat-expansion" option -q, see 
 # https://rpm-software-management.github.io/rpm/manual/scriptlet_expansion.html#queryformat-expansion ):
 # %%define _sailfish_version %%(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | %%{__sed} 's/^\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\).*/\\1\\2\\3/')
@@ -151,11 +151,11 @@ source %{_sysconfdir}/os-release
 # non-POSIX option -r for that, without a real gain compared to the basic RegEx:
 # %%define _sailfish_version %%(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | %%{__sed} -r 's/^(\[0-9\]+)\\.(\[0-9\]+)\\.(\[0-9\]+).*/\\1\\2\\3/')
 # ~: sailfish_version="$(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')"
-# Note: Debug output of RPM macrios assinged by %%define or %%global statements
-# is best done by `echo` / `printf` at the start of the %%build section.
+# Note: Debug output of RPM macros assigned by a %%define statement is best
+# done by `echo`s / `printf`s at the start of the %%build section.
 # The variant using `cut` and `tr` instead of `sed` does not require extra quoting,
-# regardless where it is used (though escaping the quotation marks might be
-# advisable, when using it inside a %%define or %%global statment's %%() ).
+# regardless where it is used (though escaping each quotation mark by a backslash
+# might be advisable, when using it inside a %%define statement's `%%()` ).
 sailfish_version="$(echo "$VERSION_ID" | cut -s -f 1-3 -d '.' | tr -d '.')"
 if echo "$sailfish_version" | grep -q '^[0-9][0-9][0-9][0-9]*$' && [ "$sailfish_version" -lt 460 ]
 then ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
