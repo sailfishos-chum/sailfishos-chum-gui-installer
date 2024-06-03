@@ -4,8 +4,8 @@ License:        LGPL-2.1-only
 Name:           sailfishos-chum-gui-installer
 # The Version field must adhere to semantic versioning, see https://semver.org/
 Version:        0.6.5
-# The Release field comprises a natural number greater or equal to 1, which
-# may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
+# The Release field should comprise a natural number greater or equal to 1,
+# which may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
 # For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
 Release:        1
