@@ -1,21 +1,20 @@
 Summary:        Installs SailfishOS:Chum GUI application
 License:        LGPL-2.1-only
+# Note that the value of %%{name} must be the project name at GitHub.
 Name:           sailfishos-chum-gui-installer
-# The Git release tag format must adhere to just <version>.  The <version>
-# field adheres to semantic versioning and the <release> field comprises a
-# natural number greater or equal to 1, which may be prefixed with one of
-# {alpha,beta,rc,release} (e.g. "beta3").  For details and reasons, see
+# The Version field must adhere to semantic versioning, see https://semver.org/
+Version:        0.6.5
+# The Release field should comprise a natural number greater or equal to 1,
+# which may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
+# For details and reasons, see
 # https://github.com/storeman-developers/harbour-storeman-installer/wiki/Git-tag-format
-Version:        0.6.4
 Release:        1
-# The Group tag should comprise one of the groups listed here:
+# The Group field should comprise one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Software Management/Package Manager
 URL:            https://github.com/sailfishos-chum/%{name}
-# The "Source0:" line below requires that the value of %%{name} is also the
-# project name at GitHub and the value of %%{version} is also the name of a
-# correspondingly set git-tag.
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+# Note that the git-tag format for releases must be `%%{release}/%%{version}`:
+Source0:        %{url}/archive/`%%{release}/%{version}/%{name}-%{version}.tar.gz
 # Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
 Source99:       %{name}.rpmlintrc 
@@ -72,8 +71,8 @@ Obsoletes:      sailfishos-chum-repo-config-testing
 Provides:       sailfishos-chum-repository
 
 %global screenshots_url    https://github.com/sailfishos-chum/sailfishos-chum-gui/raw/main/.screenshots
-%global logdir             %{_localstatedir}/log
-%global logfile            %{logdir}/%{name}.log.txt
+%define logdir             %{_localstatedir}/log
+%define logfile            %{logdir}/%{name}.log.txt
 
 # This %%description section includes metadata for SailfishOS:Chum, see
 # https://github.com/sailfishos-chum/main/blob/main/Metadata.md
@@ -142,7 +141,7 @@ source %{_sysconfdir}/os-release
 # Three equivalent variants, but the sed-based ones have addtional, ugly
 # backslashed quoting of all backslashes, curly braces and brackets (likely
 # also quotation marks), and a double percent for a single percent character,
-# because they were developed as shell-scripts inside a %%define / %%global
+# because they were developed as shell-scripts for `%%define <name> %%(<script>)`
 # (the same applies to scriplets with "queryformat-expansion" option -q, see 
 # https://rpm-software-management.github.io/rpm/manual/scriptlet_expansion.html#queryformat-expansion ):
 # %%define _sailfish_version %%(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | %%{__sed} 's/^\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\)\\.\\(\[0-9\]\[0-9\]*\\).*/\\1\\2\\3/')
@@ -152,11 +151,11 @@ source %{_sysconfdir}/os-release
 # non-POSIX option -r for that, without a real gain compared to the basic RegEx:
 # %%define _sailfish_version %%(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | %%{__sed} -r 's/^(\[0-9\]+)\\.(\[0-9\]+)\\.(\[0-9\]+).*/\\1\\2\\3/')
 # ~: sailfish_version="$(source %%{_sysconfdir}/os-release; echo "$VERSION_ID" | sed -r 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1\2\3/')"
-# Note: Debug output of RPM macrios assinged by %%define or %%global statements
-# is best done by `echo` / `printf` at the start of the %%build section.
+# Note: Debug output of RPM macros assigned by a %%define statement is best
+# done by `echo`s / `printf`s at the start of the %%build section.
 # The variant using `cut` and `tr` instead of `sed` does not require extra quoting,
-# regardless where it is used (though escaping the quotation marks might be
-# advisable, when using it inside a %%define or %%global statment's %%() ).
+# regardless where it is used (though escaping each quotation mark by a backslash
+# might be advisable, when using it inside a %%define statement's `%%()` ).
 sailfish_version="$(echo "$VERSION_ID" | cut -s -f 1-3 -d '.' | tr -d '.')"
 if echo "$sailfish_version" | grep -q '^[0-9][0-9][0-9][0-9]*$' && [ "$sailfish_version" -lt 460 ]
 then ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
