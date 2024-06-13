@@ -175,7 +175,7 @@ do
     systemd-cat -t "$called" -p 4 printf '%s' "$logentry"
     killall -q -HUP pkcon
     sleep $i
-    killall -qw -KILL pkcon
+    killall -q -KILL pkcon
     sleep 1
     pkcon -pv quit
     sleep 1
@@ -194,7 +194,7 @@ do
     logentry="[Critical] Failed to refresh sailfishos-chum repository, because error-code $retc was returned by: $logentry"
     printf '\n%s\n' "$(date -Iseconds) $logentry"
     systemd-cat -t "$called" -p 2 printf '%s' "$logentry"
-    killall -qw -KILL pkcon
+    killall -q -KILL pkcon
     sleep 1
     pkcon -pv quit
     sleep 1
