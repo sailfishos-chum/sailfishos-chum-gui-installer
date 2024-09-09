@@ -13,7 +13,7 @@ Release:        1
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Software Management/Package Manager
 URL:            https://github.com/sailfishos-chum/%{name}
-# Note that the git-tag format for releases must be `%%{release}/%%{version}`:
+# Note that the git-tag format for release versions must be `%%{release}/%%{version}`:
 Source0:        %{url}/archive/%{release}/%{version}/%{name}-%{version}.tar.gz
 # Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
