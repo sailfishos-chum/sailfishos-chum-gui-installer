@@ -14,7 +14,7 @@ Release:        1
 Group:          Software Management/Package Manager
 URL:            https://github.com/sailfishos-chum/%{name}
 # Note that the git-tag format for releases must be `%%{release}/%%{version}`:
-Source0:        %{url}/archive/`%%{release}/%{version}/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{release}/%{version}/%{name}-%{version}.tar.gz
 # Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
 Source99:       %{name}.rpmlintrc 
