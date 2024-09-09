@@ -13,7 +13,7 @@ Release:        1
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Software Management/Package Manager
 URL:            https://github.com/sailfishos-chum/%{name}
-# Note that the git-tag format for releases must be `%%{release}/%%{version}`:
+# Note that the git-tag format for release versions must be `%%{release}/%%{version}`:
 Source0:        %{url}/archive/%{release}/%{version}/%{name}-%{version}.tar.gz
 # Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
@@ -57,7 +57,7 @@ Requires(posttrans): psmisc
 Requires:       sed
 # Requires(post): sed  # Decided against this variant, see %%post scriplet
 # The oldest SailfishOS release which SailfishOS:Chum supports, because it is the
-# oldest useable DoD-repo at https://build.merproject.org/project/subprojects/sailfishos
+# oldest useable DoD-repo at https://build.sailfishos.org/project/subprojects/sailfishos
 Requires:       sailfish-version >= 3.1.0
 # Provide (anti-)dependencies to sibling packages:
 Conflicts:      sailfishos-chum
@@ -136,7 +136,7 @@ then
   umask "$curmask"
 fi
 # Add sailfishos-chum repository configuration, depending on the installed
-# SailfishOS release (3.1.0 is the lowest supported, see line 62):
+# SailfishOS release (3.1.0 is the lowest supported, see line 61):
 source %{_sysconfdir}/os-release
 # Three equivalent variants, but the sed-based ones have additional, ugly
 # backslashed quoting of all backslashes, curly braces and brackets (likely
