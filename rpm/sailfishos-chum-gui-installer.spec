@@ -3,7 +3,7 @@ License:        LGPL-2.1-only
 # Note that the value of %%{name} must be the project name at GitHub.
 Name:           sailfishos-chum-gui-installer
 # The Version field must adhere to semantic versioning, see https://semver.org/
-Version:        0.6.5
+Version:        0.6.8
 # The Release field should comprise a natural number greater or equal to 1,
 # which may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
 # For details and reasons, see
@@ -164,7 +164,7 @@ then
   then ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
   else ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
   fi
-# Should be enhanced to proper debug output, writing to log-file and systemd-journal:
+# Should be enhanced to proper debug output, also writing to log-file and systemd-journal:
 else echo "Error: VERSION_ID=$VERSION_ID => sailfish_version=$sailfish_version"
 fi
 ssu ur
@@ -216,4 +216,3 @@ exit 0
 %changelog
 * Thu Sep  9 1999 olf <Olf0@users.noreply.github.com> - 99.99.99
 - See %{url}/releases
-
