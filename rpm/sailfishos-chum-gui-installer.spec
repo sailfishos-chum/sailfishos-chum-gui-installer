@@ -3,7 +3,7 @@ License:        LGPL-2.1-only
 # Note that the value of %%{name} must be the project name at GitHub.
 Name:           sailfishos-chum-gui-installer
 # The Version field must adhere to semantic versioning, see https://semver.org/
-Version:        0.6.6
+Version:        0.6.9
 # The Release field should comprise a natural number greater or equal to 1,
 # which may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
 # For details and reasons, see
@@ -13,8 +13,8 @@ Release:        1
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group:          Software Management/Package Manager
 URL:            https://github.com/sailfishos-chum/%{name}
-# Note that the git-tag format for releases must be `%%{release}/%%{version}`:
-Source0:        %{url}/archive/`%%{release}/%{version}/%{name}-%{version}.tar.gz
+# Note that the git-tag format for release versions must be `%%{release}/%%{version}`:
+Source0:        %{url}/archive/%{release}/%{version}/%{name}-%{version}.tar.gz
 # Note that the rpmlintrc file must be named so according to
 # https://en.opensuse.org/openSUSE:Packaging_checks#Building_Packages_in_spite_of_errors
 Source99:       %{name}.rpmlintrc 
@@ -57,7 +57,7 @@ Requires(posttrans): psmisc
 Requires:       sed
 # Requires(post): sed  # Decided against this variant, see %%post scriplet
 # The oldest SailfishOS release which SailfishOS:Chum supports, because it is the
-# oldest useable DoD-repo at https://build.merproject.org/project/subprojects/sailfishos
+# oldest useable DoD-repo at https://build.sailfishos.org/project/subprojects/sailfishos
 Requires:       sailfish-version >= 3.1.0
 # Provide (anti-)dependencies to sibling packages:
 Conflicts:      sailfishos-chum
@@ -136,7 +136,7 @@ then
   umask "$curmask"
 fi
 # Add sailfishos-chum repository configuration, depending on the installed
-# SailfishOS release (3.1.0 is the lowest supported, see line 62):
+# SailfishOS release (3.1.0 is the lowest supported, see line 61):
 source %{_sysconfdir}/os-release
 # Three equivalent variants, but the sed-based ones have additional, ugly
 # backslashed quoting of all backslashes, curly braces and brackets (likely
@@ -164,7 +164,7 @@ then
   then ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(release)_%%(arch)/'
   else ssu ar sailfishos-chum 'https://repo.sailfishos.org/obs/sailfishos:/chum/%%(releaseMajorMinor)_%%(arch)/'
   fi
-# Should be enhanced to proper debug output, writing to log-file and systemd-journal:
+# Should be enhanced to proper debug output, also writing to log-file and systemd-journal:
 else echo "Error: VERSION_ID=$VERSION_ID => sailfish_version=$sailfish_version"
 fi
 ssu ur
@@ -216,4 +216,3 @@ exit 0
 %changelog
 * Thu Sep  9 1999 olf <Olf0@users.noreply.github.com> - 99.99.99
 - See %{url}/releases
-

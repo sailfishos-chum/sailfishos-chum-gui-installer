@@ -80,6 +80,10 @@ ssulr="$(ssu lr | fgrep chum | tr -s ' ')"; logentry='[Debug] "chum" entries fro
 printf '\n%s\n%s\n' "$(date -Iseconds) $logentry" "$ssulr"
 systemd-cat -t "$called" -p 7 printf '%s%s' "$logentry" "$(printf '%s' "$ssulr" | sed -e 's/^ - / /g' -e 's/ ... / /g' | tr '\n' ',')"  # Second string starts with a space due to substitution by `sed`
 
+ssuini="$(fgrep chum /etc/ssu/ssu.ini)"; logentry='[Debug] "chum" entries from /etc/ssu/ssu.ini:'
+printf '\n%s\n%s\n' "$(date -Iseconds) $logentry" "$ssuini"
+systemd-cat -t "$called" -p 7 printf '%s %s' "$logentry" "$(printf '%s' "$ssuini" | tr '\n' ',')"
+
 # Provide RPM with a little time to proceed finishing the RPM transaction,
 # which called this script asynchronously, because pkcon might fail
 # enqueuing a pkcon-job while this RPM transaction is unfinished.
@@ -175,7 +179,7 @@ do
     systemd-cat -t "$called" -p 4 printf '%s' "$logentry"
     killall -q -HUP pkcon
     sleep $i
-    killall -qw -KILL pkcon
+    killall -q -KILL pkcon
     sleep 1
     pkcon -pv quit
     sleep 1
@@ -194,7 +198,7 @@ do
     logentry="[Critical] Failed to refresh sailfishos-chum repository, because error-code $retc was returned by: $logentry"
     printf '\n%s\n' "$(date -Iseconds) $logentry"
     systemd-cat -t "$called" -p 2 printf '%s' "$logentry"
-    killall -qw -KILL pkcon
+    killall -q -KILL pkcon
     sleep 1
     pkcon -pv quit
     sleep 1
