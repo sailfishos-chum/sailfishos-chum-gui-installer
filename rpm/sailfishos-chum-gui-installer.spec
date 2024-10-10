@@ -3,7 +3,7 @@ License:        LGPL-2.1-only
 # Note that the value of %%{name} must be the project name at GitHub.
 Name:           sailfishos-chum-gui-installer
 # The Version field must adhere to semantic versioning, see https://semver.org/
-Version:        0.6.8
+Version:        0.6.9
 # The Release field should comprise a natural number greater or equal to 1,
 # which may be prefixed with one of {alpha,beta,rc,release} (e.g. "beta3").
 # For details and reasons, see
