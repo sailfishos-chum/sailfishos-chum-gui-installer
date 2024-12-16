@@ -9,7 +9,7 @@ assignees: ''
 
 **SailfishOS VERSION** (Settings → About product → Build): 
 <br />**HARDWARE** (Settings → About product → Manufacturer & Product name): 
-<br />**SailfishOS:Chum VERSION(s)** (`pkcon search name sailfishos-chum`): 
+<br />**SailfishOS:Chum package NAME and VERSION(s)** (`pkcon search name sailfishos-chum`): 
 <br />
 
 #### BUG DESCRIPTION
