@@ -20,6 +20,10 @@ The SailfishOS:Chum GUI Installer works on any SailfishOS release ≥&nbsp;3.1.0
   3. Enable olf's repository in the top pulley menu.
   4. Install *SailfishOS:Chum GUI Installer*.
 
+* **Installation via Harpoon**
+  
+  [![Add to Harpoon](add-to-harpoon.png)](https://github.com/JuhaniLehtimaeki/Harpoon)
+
 * **Initial installation without having Storeman installed**
   1. Enable "System → Security → Untrusted software → Allow untrusted software" in the SailfishOS Settings app.
   2. Download the current SailfishOS:Chum GUI Installer RPM from [OpenRepos.net](https://openrepos.net/content/olf/sailfishoschum-gui-installer#node-11554), its ["latest release" page at GitHub](https://github.com/storeman-developers/harbour-storeman-installer/releases/latest) or the [SailfishOS:Chum repository](https://build.merproject.org/project/show/sailfishos:chum/sailfishos-chum-gui-installer).
